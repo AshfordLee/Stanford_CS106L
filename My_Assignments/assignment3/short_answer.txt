@@ -1,0 +1,11 @@
+Before submitting this file, make sure that there are no more TODO
+placeholders remaining in the file (and remove this comment too).
+
+Make a Class
+------------
+
+Q1. What's const-correctness and why is it important?
+A1. const正确性是指在C++中正确使用const关键字来表明哪些对象和函数不会修改数据。这对于以下几点很重要：1) 它能帮助编译器捕获意外的数据修改；2) 它使代码的意图更清晰，表明哪些操作是只读的；3) 它能够优化代码性能，因为编译器知道const对象不会被修改。
+
+Q2. Is your class const-correct? How do you know?
+A2. 是的，我的SmartCoffeeMaker类是const正确的。这体现在以下几点：1) 所有的getter函数都被标记为const，表明它们不会修改对象的状态；2) 私有的checkWaterLevel()函数也被标记为const，因为它只进行检查而不修改状态；3) 只有需要修改对象状态的函数（如setter函数和makeCoffee）没有被标记为const。

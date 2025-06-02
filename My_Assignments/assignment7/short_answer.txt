@@ -1,0 +1,23 @@
+Before submitting this file, make sure that there are no more TODO
+placeholders remaining in the file (and remove this comment too).
+
+Unique Pointer
+--------------
+
+Q1. List one or two benefits of using RAII to manage memory instead manually calling `new` and `delete`.
+A1. 1. 自动内存管理：RAII确保资源在对象生命周期结束时自动释放，避免内存泄漏。
+    2. 异常安全：即使在发生异常的情况下，RAII也能确保资源被正确释放，提供了更好的异常安全性。
+
+Q2. When implementing move semantics for a `unique_ptr`, for example in the move constructor `unique_ptr(unique_ptr&& other)`, it is essential that we set the underlying pointer of the `other` parameter to `nullptr` before exiting the function. Explain in your own words what problem would arise if we did not.
+A2. 如果不将other的指针设为nullptr，当other对象被销毁时，它的析构函数会删除指针指向的内存。这会导致两个问题：
+    1. 双重释放：因为移动后的对象也会在其析构函数中尝试删除同一块内存
+    2. 悬空指针：移动后的对象会持有一个指向已被释放内存的指针
+
+Q3. This method of recursive deallocation through RAII works great for small lists, but may pose a problem for longer lists. Why? Hint: what is the limit for how "deep" a recursive function's call stack can grow?
+A3. 对于长链表，递归析构可能导致栈溢出。因为每个递归调用都会在调用栈上分配新的栈帧，而调用栈的大小是有限的。当链表非常长时，递归深度可能超过调用栈的限制，导致栈溢出错误。
+
+Q4. What does `std::move` do in this context? Why is it safe to use `std::move` and move semantics here?
+A4. 在这个上下文中，std::move将左值引用转换为右值引用，使我们能够使用移动语义而不是复制语义。这是安全的，因为：
+    1. unique_ptr的所有权是唯一的，我们确实想要转移所有权而不是复制
+    2. 移动后的指针会被设置为nullptr，确保原对象不会再访问被移动的资源
+    3. 这种转移是显式的，清楚地表明了我们的意图是转移资源的所有权

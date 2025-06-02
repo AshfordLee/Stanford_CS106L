@@ -1,0 +1,23 @@
+Before submitting this file, make sure that there are no more TODO
+placeholders remaining in the file (and remove this comment too).
+
+Marriage Pact
+-------------
+
+Q1. It is your choice to use either an ordered or unordered set. In a few sentences, what are some of the tradeoffs between the two? Additionally, please give an example (that has not been shown in lecture) of a valid hash function that could be used to hash student names for an unordered set.
+A1. 有序集合（std::set）和无序集合（std::unordered_set）的主要区别在于：
+1. 有序集合使用红黑树实现，保证元素按顺序存储，查找、插入和删除操作的时间复杂度为O(log n)。
+2. 无序集合使用哈希表实现，元素无序存储，平均情况下查找、插入和删除操作的时间复杂度为O(1)，但在最坏情况下（哈希冲突严重）可能退化到O(n)。
+3. 有序集合消耗更多内存来维护树结构，而无序集合需要额外空间来存储哈希表。
+
+一个可用于哈希学生姓名的哈希函数示例：
+将姓名中每个字符的ASCII值乘以其位置（从1开始），然后求和。这样可以保证即使字符顺序不同的名字也会得到不同的哈希值。
+例如：对于名字"John"：
+hash = ('J' * 1) + ('o' * 2) + ('h' * 3) + ('n' * 4)
+
+Q2. Note that we are saving pointers to names in the queue, not names themselves. Why might this be desired in this problem? What happens if the original set where the names are stored goes out of scope and the pointers are referenced?
+A2. 在队列中存储指向名字的指针而不是名字本身有以下好处：
+1. 内存效率：避免了复制大量字符串，只需存储指针（通常8字节），而不是整个字符串。
+2. 性能：移动和比较指针的操作比移动和比较字符串更快。
+
+然而，如果原始集合（students）超出作用域，指针将变成悬空指针（dangling pointers），因为它们指向的内存已经被释放。这种情况下访问这些指针将导致未定义行为。因此，必须确保在使用指针期间，原始集合保持有效。

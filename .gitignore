@@ -21,4 +21,7 @@
 .idea/
 *.suo
 *.user 
-# Assignments/
+
+# 确保Assignments目录下的所有文件都被追踪
+!Assignments/
+!Assignments/**/*
