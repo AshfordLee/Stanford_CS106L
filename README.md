@@ -1,3 +1,5 @@
+# [🇨🇳 中文版本](README_zh.md)
+
 # Stanford CS106L — Course Materials and Assignments
 
 This repository collects lecture materials, example code, homework and lab assignments for the Stanford CS106L course. It is intended to make it easy to browse, build, and run the course examples and assignment solutions.
