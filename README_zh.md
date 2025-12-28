@@ -1,6 +1,6 @@
 # [🇺🇸 English version](README.md)
 
-# Stanford CS106L — 课程资料与作业集合（中文）
+# Stanford CS106L — 课程资料与作业集合
 
 本仓库汇集了 Stanford CS106L 课程的讲义、示例代码、作业与实验，方便浏览、编译与运行课堂示例与作业实现。
 
